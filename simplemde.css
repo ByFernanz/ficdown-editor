@@ -328,7 +328,10 @@ div.CodeMirror-dragcursors {
 .CodeMirror-crosshair { cursor: crosshair; }
 .CodeMirror-line::selection, .CodeMirror-line > span::selection, .CodeMirror-line > span > span::selection { background: #d7d4f0; }
 .CodeMirror-line::-moz-selection, .CodeMirror-line > span::-moz-selection, .CodeMirror-line > span > span::-moz-selection { background: #d7d4f0; }
-
+.CodeMirror-selectedtext{ color: #fff;
+  background: #dda0dd;
+  background-color: blueviolet;
+  text-shadow: 1px 1px 2px blue;}
 .cm-searching {
   background-color: #ffa;
   background-color: rgba(255, 255, 0, .4);
@@ -348,7 +351,7 @@ div.CodeMirror-dragcursors {
 .cm-tab-wrap-hack:after { content: ''; }
 
 /* Help users use markselection to safely style text background */
-span.CodeMirror-selectedtext { background: none; }
+span.CodeMirror-selectedtext { background: #0066ff; }
 
 .CodeMirror {
     height: auto;
