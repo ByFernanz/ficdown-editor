@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Ficdown Editor</title>
+	<link rel="stylesheet" type="text/css" href="ficdown.css">
+	<link rel="stylesheet" href="simplemde.css">
+
+  </head>
+  <body>
+<script src="jquery-2.1.1.min.js"></script>
+    <script src="Markdown.Converter.min.js"></script>
+    <script src="Markdown.Sanitizer.min.js"></script>
+	<script src="ficdown.js"></script>
+	<script src="play.js"></script>
+<section class="main-content">
+<textarea hidden id="gamesource"># [Historia De Ejemplo](/primera-escena)
+
+Este es un ejemplo de una historia en Ficdown.
+
+## Primera escena
+
+Esta es la primera escena, contiene un enlace a la [segunda escena](/segunda-escena).
+
+## Segunda escena
+
+Esta es la segunda escena, contiene un enlace a la [primera escena](/primera-escena).</textarea></section>
+<script src="simplemde.js"></script>
+<script>
+	simplemde=new SimpleMDE({
+		element: document.getElementById("gamesource"),
+		spellChecker: false,
+		status: false,
+		autofocus: true,
+		status: ["autosave"],
+		autosave: {
+			enabled: true,
+			delay: 30000,
+			unique_id: "ficdown-webeditor"
+		}
+	});
+	simplemde.toggleFullScreen();
+	simplemde.codemirror.setOption('lineNumbers', true);
+	</script>
+<div id="overlay"></div>
+<div id="playpopup" class="container">
+	<label class="control">
+		<a id="gameclose" href="#">Cerrar Juego X</a>
+	</label>
+	<div id="gamecontent"></div>
+</div>
+</body>
+</html>

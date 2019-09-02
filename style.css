@@ -1,0 +1,112 @@
+@import "fonts.css";
+
+html,body, .container { height: 90%; }
+
+.container{
+	max-width: 75%;
+	height: 100%;
+	margin: auto;
+	overflow-x: hidden; 
+	overflow-y: scroll;  
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+
+body {
+  margin: 0 auto;
+  max-width: 100%;
+  line-height: 1.2;
+  padding: 4em 1em;
+
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+
+}
+hr{
+	margin-bottom: 3em;
+	margin-top: 3em;
+}
+
+h1, h2 {
+  font-size: 2.5em;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+p {
+	max-width: 75%;
+	font-size: 1em;
+	margin: auto;
+}
+
+ul{
+	max-width: 50%;
+	text-align: center;
+	margin: auto;
+	margin-top: 2em;
+	list-style-type: none;
+}
+
+img {
+	margin-top: 2em;
+	width: 25%;
+	float: left;
+	margin-right: 5em;
+}
+
+#main{
+	font-family:'Merriweather',serif;color:#000;
+	width: 90%;
+	margin: auto;	
+	padding: 0%;
+}
+#main h1{
+	font-weight:700;font-size:250%;margin-top:15px;text-align: center;
+}
+#main h2{
+	font-weight:700;font-size:125%;border-bottom: 1px solid #000; margin-top: 5%;
+}
+#main h1,#main h2,#main p,#main ul{
+	margin-bottom:15px
+}
+#main p{
+	text-align: justify;
+}
+#main em{
+	font-style:italic
+}
+#main strong{
+	font-weight:700
+}
+#main a{
+	#0000FF;text-decoration:underline;
+}
+#main a:hover{
+	color:#f00
+}
+#main a.disabled,#main a.disabled:hover{
+	color: #999;cursor: not-allowed;
+}
+#main a.disabled.chosen,#main a.disabled:hover.chosen{
+	color: #000;
+}
+
+.fa-scene{
+	content: "\f008";
+
+}
+.fa-scene::before{
+
+}
+.fa-action::before{
+
+}
+
+cm-keyword {
+		font-family: Arial, monospace;
+}

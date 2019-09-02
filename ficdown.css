@@ -1,0 +1,49 @@
+@import "cssreset.css";
+@import "fonts.css";
+textarea{font-family:'Merriweather',serif;}
+#playground{color:#fff;text-decoration:none;padding:4px 10px;background:#0094ff;font-family:'AnonymousPro',monospace;}a#playground:hover{background-color:#006fbf;color:#fff}#overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:99;background-color:#000;opacity:.66}#playpopup{display:none;position:fixed;z-index:100;background-color:#fff;border:2px solid #0094ff;top:60px;left:60px;right:60px;bottom:60px;overflow-y:scroll;}#playpopup #gamecontent{max-width:900px;margin:0 auto}#playpopup label.control{position:fixed}label.control{top:0;right:0;}label.control a{display:block;color:#fff;text-decoration:none;padding:4px 10px;background:#0094ff;font-family:'AnonymousPro',monospace;}label.control a:hover{background-color:#006fbf;color:#fff}
+
+#gamecontent{
+	font-family:'Merriweather',serif;color:#000;
+	width: 90%;
+	margin: auto;	
+	padding: 0%;
+}
+#gamecontent h1{
+	font-weight:700;font-size:250%;margin-top:15px;text-align: center;
+}
+#gamecontent h2{
+	font-weight:700;font-size:125%;border-bottom: 1px solid #000; margin-top: 5%;
+}
+#gamecontent h1,#gamecontent h2,#gamecontent p,#gamecontent ul{
+	margin-bottom:15px
+}
+#gamecontent p{
+	text-align: justify;
+}
+#gamecontent em{
+	font-style:italic
+}
+#gamecontent strong{
+	font-weight:700
+}
+#gamecontent a{
+	#0000FF;text-decoration:underline;
+}
+#gamecontent a:hover{
+	color:#f00
+}
+#gamecontent a.disabled,#gamecontent a.disabled:hover{
+	color: #999;cursor: not-allowed;
+}
+#gamecontent a.disabled.chosen,#gamecontent a.disabled:hover.chosen{
+	color: #000;
+}
+
+ul{
+	max-width: 50%;
+	text-align: center;
+	margin: auto;
+	margin-top: 2em;
+	list-style-type: none;
+}
