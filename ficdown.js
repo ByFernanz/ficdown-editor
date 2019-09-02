@@ -1,6 +1,6 @@
 var Player, blockToAction, blockToScene, conditionsMet, extractBlocks, getBlockType, matchAnchor, matchAnchors, matchHref, normalize, parseBlocks, parseText, regexLib, splitAltText, toBoolHash, trimText, scrollAct=true;
 
-element=document.getElementById('main');
+element=document.getElementById('gamecontent');
 
 parseText = function(text) {
   var blocks, lines, story;
