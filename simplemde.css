@@ -243,7 +243,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #a22;}
   /* Reset some styles that the rest of the page might have set */
   -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0;
   border-width: 0;
-  background:url("linedpaper.png") repeat;
+  background-color: white;
   font-family: 'AnonymousPro',monospace;
   font-size: inherit;
   margin: 0;
