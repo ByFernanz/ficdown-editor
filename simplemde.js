@@ -17442,12 +17442,19 @@ var toolbarBuiltInButtons = {
   },
   "separator-4": {
 		name: "separator-4"
-	},
-	"guide": {
-		name: "guide",
-		action: "https://ficdown.com/reference",
-		className: "fa fa-question-circle",
-		title: "Guía de Ficdown",
+  },
+  "reducir": {
+		name: "reducir",
+		action: toggleReducir,
+    className: "fa fa-search-minus",
+		title: "Reducir tamaño de fuente",
+		default: true
+  },
+  "aumentar": {
+		name: "aumentar",
+		action: toggleAumentar,
+    className: "fa fa-search-plus",
+		title: "Aumentar tamaño de fuente",
 		default: true
   },
 	"undo": {
@@ -17463,7 +17470,14 @@ var toolbarBuiltInButtons = {
 		className: "fa fa-repeat no-disable",
     title: "Rehacer",
     default: true
-	},
+  },
+  "guide": {
+		name: "guide",
+		action: "https://ficdown.com/reference",
+		className: "fa fa-question-circle",
+		title: "Guía de Ficdown",
+		default: true
+  },
 	"separator-6": {
 		name: "separator-6"
 	},
@@ -18428,3 +18442,22 @@ function errorHandler(evt) {
 
     var input=document.getElementById('files');
     input.addEventListener('change', handleFileSelect, false);
+
+function toggleReducir(){
+  var sizeactual = $('.CodeMirror-code').css('fontSize');
+  var size = str_replace(sizeactual, 'px', '');
+  size=parseInt(size)-3;
+  $('.CodeMirror-code').css({'fontSize': size});
+}
+
+function toggleAumentar(){
+  var sizeactual = $('.CodeMirror-code').css('fontSize');
+  var size = str_replace(sizeactual, 'px', '');
+  size=parseInt(size)+3;
+  $('.CodeMirror-code').css({'fontSize': size});
+}
+
+function str_replace(haystack, needle, replacement) {
+  var temp = haystack.split(needle);
+  return temp.join(replacement);
+}
