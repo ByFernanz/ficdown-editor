@@ -25,6 +25,9 @@ Esta es la primera escena, contiene un enlace a la [segunda escena](/segunda-esc
 
 Esta es la segunda escena, contiene un enlace a la [primera escena](/primera-escena).</textarea></section>
 <script src="simplemde.js"></script>
+<script src="jszip.js"></script>
+<script src="FileSaver.js"></script>
+<script src="jszip-utils.js"></script>
 <script>
 	simplemde=new SimpleMDE({
 		element: document.getElementById("gamesource"),
@@ -35,7 +38,7 @@ Esta es la segunda escena, contiene un enlace a la [primera escena](/primera-esc
 		autosave: {
 			enabled: true,
 			delay: 30000,
-			unique_id: "ficdown-webeditor"
+			unique_id: "ficdown-editor"
 		}
 	});
 	simplemde.toggleFullScreen();

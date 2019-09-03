@@ -17376,11 +17376,18 @@ var toolbarBuiltInButtons = {
 		title: "Probar historia",
 		default: true
   },
-  "saveto": {
-		name: "saveto",
+  "savetext": {
+		name: "savetext",
 		action: saveTextAsFile,
     className: "fa fa-cloud-download",
 		title: "Descargar código",
+		default: true
+	},
+"saveweb": {
+		name: "saveweb",
+		action: null,
+    className: "fa fa-file-code-o",
+		title: "Descargar juego independiente",
 		default: true
 	},
 	"side-by-side": {
@@ -18324,4 +18331,22 @@ function toggleLink(editor) {
   cm.replaceSelection(output);
 
 }
+
+$(document).ready(function() {
+  $("#saveweb").on("click", function() {
+    JSZipUtils.getBinaryContent('ficdown-game.zip', function(err, data) {
+      if(err) {
+        throw err; // or handle err
+      }
+
+      var zip = new JSZip(data);
+      var folder = zip.folder("ficdown-game");
+      folder.file("story.md", simplemde.value());
+      var content = zip.generate({type:"blob"});
+      // see FileSaver.js
+      saveAs(content, "ficdown-game.zip");
+    });
+
+  });
+});
 
