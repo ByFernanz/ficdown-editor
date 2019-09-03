@@ -17212,6 +17212,9 @@ function wordCount(data) {
 }
 
 var toolbarBuiltInButtons = {
+  "separator-1": {
+		name: "separator-1"
+	},
   "heading": {
 		name: "heading",
 		action: toggleHeadingSmaller,
@@ -17305,8 +17308,8 @@ var toolbarBuiltInButtons = {
     title: "Insertar código",
     default: true
   },
-  "separator-1": {
-		name: "separator-1"
+  "separator-2": {
+		name: "separator-2"
 	},
 	"bold": {
 		name: "bold",
@@ -17348,8 +17351,8 @@ var toolbarBuiltInButtons = {
 		className: "fa fa-eraser fa-clean-block",
 		title: "Clean block"
 	},
-	"separator-2": {
-		name: "separator-2"
+	"separator-3": {
+		name: "separator-3"
 	},
 	"imageUpload": {
 		name: "imageUpload",
@@ -17368,7 +17371,14 @@ var toolbarBuiltInButtons = {
 		action: drawHorizontalRule,
 		className: "fa fa-minus",
     title: "Insert Horizontal Line",
-	},
+  },
+  "upload": {
+		name: "upload",
+		action: toggleUpload,
+    className: "fa fa-upload",
+		title: "Subir código fuente",
+		default: true
+  },
 	"preview": {
 		name: "preview",
 		action: null,
@@ -17380,14 +17390,28 @@ var toolbarBuiltInButtons = {
 		name: "savetext",
 		action: saveTextAsFile,
     className: "fa fa-cloud-download",
-		title: "Descargar código",
+		title: "Descargar código fuente",
 		default: true
 	},
-"saveweb": {
+  "saveweb": {
 		name: "saveweb",
 		action: null,
     className: "fa fa-file-code-o",
 		title: "Descargar juego independiente",
+		default: true
+  },
+  "savepub": {
+		name: "savepub",
+		action: "https://ficdown.com/compile",
+    className: "fa fa-book",
+		title: "Exportar a EPUB",
+		default: true
+  },
+  "android": {
+		name: "android",
+		action: null,
+    className: "fa fa-android",
+		title: "Exportar a Android",
 		default: true
 	},
 	"side-by-side": {
@@ -17402,8 +17426,8 @@ var toolbarBuiltInButtons = {
 		className: "fa fa-arrows-alt no-disable no-mobile",
 		title: "Toggle Fullscreen",
   },
-  "separator-3": {
-		name: "separator-3"
+  "separator-4": {
+		name: "separator-4"
 	},
 	"guide": {
 		name: "guide",
@@ -17875,7 +17899,9 @@ SimpleMDE.prototype.createToolbar = function(items) {
 	}
 
 	var bar = document.createElement("div");
-	bar.className = "editor-toolbar";
+  bar.className = "editor-toolbar";
+  
+  bar.innerHTML="<span class=\"ficdown-editor\">Ficdown Editor</span>";
 
 	var self = this;
 
@@ -18350,3 +18376,8 @@ $(document).ready(function() {
   });
 });
 
+function toggleUpload(){
+  var input = document.createElement('input');
+  input.type = 'file';
+  input.click();
+}

@@ -1,4 +1,11 @@
 @font-face {
+  font-family: 'Annie';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Annie'), local('AnnieUseYourTelescope'), url(fonts/annie_400.woff2) format('woff2'), url(fonts/annie_400.woff) format('woff');
+}
+
+@font-face {
   font-family: 'Merriweather';
   font-style: normal;
   font-weight: 400;

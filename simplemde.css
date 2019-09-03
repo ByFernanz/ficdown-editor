@@ -386,7 +386,6 @@ span.CodeMirror-selectedtext { background: #0066ff; }
 
 .editor-toolbar {
     position: relative;
-    opacity: .6;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -689,3 +688,9 @@ span.CodeMirror-selectedtext { background: #0066ff; }
 
 .cm-formatting-list {font-weight: bold;}
 .cm-image{color:#f00;} 
+
+.ficdown-editor{
+  font-family: 'Annie',sans-serif;
+  font-weight: 500;
+  font-size: 150%;
+}
