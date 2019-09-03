@@ -17376,7 +17376,7 @@ var toolbarBuiltInButtons = {
 		name: "upload",
 		action: toggleUpload,
     className: "fa fa-upload",
-		title: "Subir código fuente",
+		title: "Cargar código fuente",
 		default: true
   },
 	"preview": {
@@ -17407,13 +17407,27 @@ var toolbarBuiltInButtons = {
 		title: "Exportar a EPUB",
 		default: true
   },
-  "android": {
+  /*"android": {
 		name: "android",
 		action: null,
     className: "fa fa-android",
 		title: "Exportar a Android",
 		default: true
 	},
+  "windows": {
+		name: "windows",
+		action: null,
+    className: "fa fa-windows",
+		title: "Exportar a Windows",
+		default: true
+  },
+  "ios": {
+		name: "ios",
+		action: null,
+    className: "fa fa-apple",
+		title: "Exportar a iOS",
+		default: true
+	},*/
 	"side-by-side": {
 		name: "side-by-side",
 		action: toggleSideBySide,
@@ -18377,7 +18391,40 @@ $(document).ready(function() {
 });
 
 function toggleUpload(){
-  var input = document.createElement('input');
-  input.type = 'file';
   input.click();
 }
+
+function errorHandler(evt) {
+  switch(evt.target.error.code) {
+    case evt.target.error.NOT_FOUND_ERR:
+    alert('File Not Found!');
+    break;
+    case evt.target.error.NOT_READABLE_ERR:
+    alert('File is not readable');
+    break;
+    case evt.target.error.ABORT_ERR:
+    break; // noop
+    default:
+    alert('An error occurred reading this file.');
+  };
+  }
+
+  function handleFileSelect(evt) {
+    // Reset progress indicator on new file selection.
+
+    reader = new FileReader();
+    reader.onerror = errorHandler;
+    reader.onabort = function(e) {
+      alert('File read cancelled');
+    };
+    reader.onload = function(e) {
+      // Ensure that the progress bar displays 100% at the end.
+      simplemde.value((e.target.result));
+    }
+
+    // Read in the image file as a text string.
+    reader.readAsText(evt.target.files[0]);
+    }
+
+    var input=document.getElementById('files');
+    input.addEventListener('change', handleFileSelect, false);

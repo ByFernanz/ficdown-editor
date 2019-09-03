@@ -24,6 +24,9 @@ Esta es la primera escena, contiene un enlace a la [segunda escena](/segunda-esc
 ## Segunda escena
 
 Esta es la segunda escena, contiene un enlace a la [primera escena](/primera-escena).</textarea></section>
+<input style="display:none;" type="file"
+       id="files" name="files"
+       accept=".md">
 <script src="simplemde.js"></script>
 <script src="jszip.js"></script>
 <script src="FileSaver.js"></script>
@@ -42,6 +45,7 @@ Esta es la segunda escena, contiene un enlace a la [primera escena](/primera-esc
 	});
 	simplemde.toggleFullScreen();
 	simplemde.codemirror.setOption('lineNumbers', true);
+	document.getElementById('files').addEventListener('change', handleFileSelect, false);
 	</script>
 <div id="overlay"></div>
 <div id="playpopup" class="container">
