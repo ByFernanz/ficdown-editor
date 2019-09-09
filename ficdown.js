@@ -1,6 +1,6 @@
 var Player, blockToAction, blockToScene, conditionsMet, extractBlocks, getBlockType, matchAnchor, matchAnchors, matchHref, normalize, parseBlocks, parseText, regexLib, splitAltText, toBoolHash, trimText, scrollAct=true;
 
-element=document.getElementById('gamecontent');
+element=document.getElementById('main');
 
 parseText = function(text) {
   var blocks, lines, story;
@@ -142,7 +142,32 @@ Player = (function() {
   }
 
   Player.prototype.play = function() {
-    this.container.html(this.converter.makeHtml("#" + this.story.name + "\n\n" + this.story.description + "\n\n[" + this.startText + "](/" + this.story.firstScene + ")"));
+    startHtml=this.converter.makeHtml("#" + this.story.name + "\n\n" + this.story.description + "\n\n[" + this.startText + "](/" + this.story.firstScene + ")");
+    startHtml=startHtml.replace("<!--<script","<script");
+    startHtml=startHtml.replace("<!-- <script","<script");
+    startHtml=startHtml.replace("<p><script","<script");
+    startHtml=startHtml.replace("</script>-->","</script>");
+    startHtml=startHtml.replace("</script> -->","</script>");
+    startHtml=startHtml.replace("</script></p>","</script>");
+    startHtml=startHtml.replace("<!--<style>","<style>");
+    startHtml=startHtml.replace("<!-- <style>","<style>");
+    startHtml=startHtml.replace("<p><style>","<style>");
+    startHtml=startHtml.replace("</style>-->","</style>");
+    startHtml=startHtml.replace("</style> -->","</style>");
+    startHtml=startHtml.replace("</style></p>","</style>");
+    startHtml=startHtml.replace("<!--<iframe>","<iframe>");
+    startHtml=startHtml.replace("<!-- <iframe>","<iframe>");
+    startHtml=startHtml.replace("<p><iframe>","<iframe>");
+    startHtml=startHtml.replace("</iframe>-->","</iframe>");
+    startHtml=startHtml.replace("</iframe> -->","</iframe>");
+    startHtml=startHtml.replace("</iframe></p>","</iframe>");
+    startHtml=startHtml.replace("<!--<audio","<audio");
+    startHtml=startHtml.replace("<!-- <audio","<audio");
+    startHtml=startHtml.replace("<p><audio","<audio");
+    startHtml=startHtml.replace("</audio>-->","</audio>");
+    startHtml=startHtml.replace("</audio> -->","</audio>");
+    startHtml=startHtml.replace("</audio></p>","</audio>");
+    this.container.html(startHtml);
     return this.wireLinks();
   };
 
@@ -282,19 +307,33 @@ Player = (function() {
     this.visitedScenes[newScene.id] = true;
     scrollId = "move-" + (this.moveCounter++);
     if(scrollAct==false){
-      document.getElementById('main').innerHTML='';
+      document.getElementById(player.id).innerHTML='';
     }
     this.container.append($('<span/>').attr('id', scrollId));
-    newHtml=newHtml.replace("<!--<script>","<script>");
-    newHtml=newHtml.replace("<!-- <script>","<script>");
-    newHtml=newHtml.replace("<p><script>","<script>");
+    newHtml=newHtml.replace("<!--<script","<script");
+    newHtml=newHtml.replace("<!-- <script","<script");
+    newHtml=newHtml.replace("<p><script","<script");
     newHtml=newHtml.replace("</script>-->","</script>");
     newHtml=newHtml.replace("</script> -->","</script>");
     newHtml=newHtml.replace("</script></p>","</script>");
     newHtml=newHtml.replace("<!--<style>","<style>");
+    newHtml=newHtml.replace("<!-- <style>","<style>");
     newHtml=newHtml.replace("<p><style>","<style>");
     newHtml=newHtml.replace("</style>-->","</style>");
+    newHtml=newHtml.replace("</style> -->","</style>");
     newHtml=newHtml.replace("</style></p>","</style>");
+    newHtml=newHtml.replace("<!--<iframe>","<iframe>");
+    newHtml=newHtml.replace("<!-- <iframe>","<iframe>");
+    newHtml=newHtml.replace("<p><iframe>","<iframe>");
+    newHtml=newHtml.replace("</iframe>-->","</iframe>");
+    newHtml=newHtml.replace("</iframe> -->","</iframe>");
+    newHtml=newHtml.replace("</iframe></p>","</iframe>");
+    newHtml=newHtml.replace("<!--<audio","<audio");
+    newHtml=newHtml.replace("<!-- <audio","<audio");
+    newHtml=newHtml.replace("<p><audio","<audio");
+    newHtml=newHtml.replace("</audio>-->","</audio>");
+    newHtml=newHtml.replace("</audio> -->","</audio>");
+    newHtml=newHtml.replace("</audio></p>","</audio>");
     this.container.append(newHtml);
     if(scrollAct==false){
       pfadeIn(element,400);
