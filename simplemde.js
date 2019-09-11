@@ -18484,10 +18484,10 @@ function listaEscenasAcciones(){
         var escenaMatch = escenaRegex.exec(stripLine);
         var accionMatch = accionRegex.exec(stripLine);
         if(escenaMatch){
-            lasEscenas.innerHTML+="<a href=\"#\" onclick=\"jumpToLine("+linea+")\">"+escenaMatch[1]+"</a><hr/>";
+            lasEscenas.innerHTML+="<a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+escenaMatch[1]+"</a><hr/>";
 		}
 		if(accionMatch){
-            lasAcciones.innerHTML+="<a href=\"#\" onclick=\"jumpToLine("+linea+")\">"+accionMatch[1]+"</a><hr/>";;
+            lasAcciones.innerHTML+="<a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+accionMatch[1]+"</a><hr/>";;
             }
     });
 }
