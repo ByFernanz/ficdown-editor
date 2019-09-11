@@ -787,5 +787,5 @@ margin: 0;
   font-size: 150%;
 }
 
-a{text-decoration: none; color: black;}
+.lista-general a{text-decoration: none; color: black;}
 hr{width: 100%; color: black; margin: 0;}

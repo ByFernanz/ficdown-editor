@@ -18476,7 +18476,7 @@ function listaEscenasAcciones(){
 		var linea=index;
         var stripLine = line.trim();
         var tituloMatch = tituloRegex.exec(stripLine);
-        if(firstLine){
+        if(firstLine && tituloMatch){
                 Titulo=tituloMatch[1];
                 primeraEscena=tituloMatch[2];
                 firstLine=false;
