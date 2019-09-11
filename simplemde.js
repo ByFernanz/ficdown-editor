@@ -17927,9 +17927,8 @@ SimpleMDE.prototype.createToolbar = function(items) {
 	}
 
 	var bar = document.createElement("div");
-  bar.className = "editor-toolbar";
-  
-  bar.innerHTML="<span class=\"ficdown-editor\">Ficdown Editor</span>";
+  	bar.className = "editor-toolbar";
+  	bar.innerHTML="<span class=\"ficdown-editor\">Ficdown Editor</span>";
 
 	var self = this;
 
@@ -18461,3 +18460,46 @@ function str_replace(haystack, needle, replacement) {
   var temp = haystack.split(needle);
   return temp.join(replacement);
 }
+
+function listaEscenasAcciones(){
+    var data=simplemde.value();
+	var lasEscenas=document.getElementById("las-escenas");
+	var lasAcciones=document.getElementById("las-acciones");
+	lasEscenas.innerHTML="";
+	lasAcciones.innerHTML="";
+    var lines = data.replace(/\r/g, '').split('\n');
+    var tituloRegex = /^\#\ \[(.*)\]\(\/(.*)\)$/;
+    var escenaRegex = /^\#\#\ (.*)$/;
+    var accionRegex = /^\#\#\#\ (.*)$/;
+    var firstLine=true;
+    lines.forEach(function(line,index){
+		var linea=index;
+        var stripLine = line.trim();
+        var tituloMatch = tituloRegex.exec(stripLine);
+        if(firstLine){
+                Titulo=tituloMatch[1];
+                primeraEscena=tituloMatch[2];
+                firstLine=false;
+        }
+        var escenaMatch = escenaRegex.exec(stripLine);
+        var accionMatch = accionRegex.exec(stripLine);
+        if(escenaMatch){
+            lasEscenas.innerHTML+="<a href=\"#\" onclick=\"jumpToLine("+linea+")\">"+escenaMatch[1]+"</a><hr/>";
+		}
+		if(accionMatch){
+            lasAcciones.innerHTML+="<a href=\"#\" onclick=\"jumpToLine("+linea+")\">"+accionMatch[1]+"</a><hr/>";;
+            }
+    });
+}
+
+
+
+
+function jumpToLine(i) { 
+	simplemde.codemirror.focus();
+	editor.setCursor(i,0); 
+    var t = editor.charCoords({line: i, ch: 0}, "local").top; 
+    var middleHeight = editor.getScrollerElement().offsetHeight / 55; 
+    editor.scrollTo(null, t - middleHeight - 5);
+} 
+

@@ -23,7 +23,14 @@ Esta es la primera escena, contiene un enlace a la [segunda escena](/segunda-esc
 
 ## Segunda escena
 
-Esta es la segunda escena, contiene un enlace a la [primera escena](/primera-escena).</textarea></section>
+Esta es la segunda escena, contiene un enlace a la [primera escena](/primera-escena).</textarea>
+<div class="lista-general">
+	<div class="titulo-escenas">ESCENAS</div>
+	<div id="las-escenas" class="las-escenas"></div>
+	<div class="titulo-acciones">ACCIONES</div>
+	<div id="las-acciones" class="las-acciones"></div>
+</div></section>
+
 <input style="display:none;" type="file"
        id="files" name="files"
        accept=".md">
@@ -31,22 +38,25 @@ Esta es la segunda escena, contiene un enlace a la [primera escena](/primera-esc
 <script src="jszip.js"></script>
 <script src="FileSaver.js"></script>
 <script src="jszip-utils.js"></script>
-<script src="index.js"></script>
 <script>
 	simplemde=new SimpleMDE({
 		element: document.getElementById("gamesource"),
 		spellChecker: false,
 		status: false,
 		autofocus: true,
+		onload: listaEscenasAcciones,
 		autosave: {
 			enabled: true,
 			delay: 5000,
 			unique_id: "ficdown-editor"
 		}
 	});
+	var editor = simplemde.codemirror;
+	window.onload=listaEscenasAcciones;
 	simplemde.toggleFullScreen();
 	simplemde.codemirror.setOption('lineNumbers', true);
 	document.getElementById('files').addEventListener('change', handleFileSelect, false);
+	simplemde.codemirror.on("change",listaEscenasAcciones);
 	</script>
 <div id="overlay"></div>
 <div id="playpopup" class="container">
