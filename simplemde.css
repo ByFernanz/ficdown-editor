@@ -374,7 +374,7 @@ span.CodeMirror-selectedtext { background: #0066ff; }
     position: fixed !important;
     top: 50px;
     left: 20%;
-    right: 0;
+    right: 20%;
     bottom: 0;
     height: auto;
     z-index: 9;
@@ -427,7 +427,38 @@ span.CodeMirror-selectedtext { background: #0066ff; }
     z-index: 9;
 }
 
+.lista-variables {
+	background:white;
+    position: block;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    padding: 0px;
+    border-top: 1px solid #bbb;
+    border-left: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+	width: 20%;
+    height:100%-70px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    border-top: 1px solid #ddd;
+    position: fixed;
+    top: 50px;
+    left: 80%;
+    right: 0;
+    bottom: 0;
+    opacity: 1;
+    z-index: 9;
+}
+
 .titulo-escenas{
+display: flex;
+justify-content: center;
+align-items: center; 
 color: white;
 background-color: black;
 /*font-family: 'Annie',sans-serif;*/
@@ -443,6 +474,9 @@ height:3%;
 }
 
 .titulo-acciones{
+display: flex;
+justify-content: center; /* align horizontal */
+align-items: center; 
 color: white;
 background-color: black;
 /*font-family: 'Annie',sans-serif;*/
@@ -458,23 +492,24 @@ height:3%;
 }
 
 .las-escenas{
+overflow-x: auto;
+overflow-y: auto;
 background-color: transparent;
 text-align: left;
 font-family: 'AnonymousPro',monospace;
 font-size: 100%;
-overflow-x: auto;
-overflow-y: auto;
 width: 100%;
 height:47%;
 top: 0;
 left: 0;
 right: 0;
-bottom: 0;
+bottom: 47%;
 padding: 0;
 margin: 0;
 }
 
 .las-acciones{
+
 background-color: transparent;
 text-align: left;
 font-family: 'AnonymousPro',monospace;
@@ -487,6 +522,41 @@ top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+padding: 0;
+margin: 0;
+}
+
+.titulo-variables{
+display: flex;
+justify-content: center; /* align horizontal */
+align-items: center; 
+color: white;
+background-color: black;
+/*font-family: 'Annie',sans-serif;*/
+font-family: 'AnonymousPro',monospace;
+  font-weight: 500;
+  font-size: 100%;
+  text-align: center;
+height:3%;
+	top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;	
+}
+
+.las-variables{
+overflow-x: auto;
+overflow-y: auto;
+background-color: transparent;
+text-align: left;
+font-family: 'AnonymousPro',monospace;
+font-size: 100%;
+width: 100%;
+height:47%;
+top: 0;
+left: 0;
+right: 0;
+bottom: 47%;
 padding: 0;
 margin: 0;
 }
@@ -787,5 +857,12 @@ margin: 0;
   font-size: 150%;
 }
 
-.lista-general a{text-decoration: none; color: black;}
-hr{width: 100%; color: black; margin: 0;}
+.lista-general a{text-decoration: none; color: blue;}
+
+.lista-variables a{text-decoration: none; color: black;}
+
+.sideMenuItem{
+ border-bottom:1px solid gray;
+ width: 500%;
+}
+

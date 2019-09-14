@@ -18465,13 +18465,17 @@ function listaEscenasAcciones(){
     var data=simplemde.value();
 	var lasEscenas=document.getElementById("las-escenas");
 	var lasAcciones=document.getElementById("las-acciones");
+	var lasVariables=document.getElementById("las-variables");
 	lasEscenas.innerHTML="";
 	lasAcciones.innerHTML="";
+	lasVariables.innerHTML="";
     var lines = data.replace(/\r/g, '').split('\n');
     var tituloRegex = /^\#\ \[(.*)\]\(\/(.*)\)$/;
     var escenaRegex = /^\#\#\ (.*)$/;
     var accionRegex = /^\#\#\#\ (.*)$/;
+	var	varRegex = /\[(.*?)\]\((.*?)\#(.*?)\)/;
     var firstLine=true;
+	var variables=[];
     lines.forEach(function(line,index){
 		var linea=index;
         var stripLine = line.trim();
@@ -18483,12 +18487,22 @@ function listaEscenasAcciones(){
         }
         var escenaMatch = escenaRegex.exec(stripLine);
         var accionMatch = accionRegex.exec(stripLine);
+		var varMatch = varRegex.exec(stripLine);
         if(escenaMatch){
-            lasEscenas.innerHTML+="<a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+escenaMatch[1]+"</a><hr/>";
+            lasEscenas.innerHTML+="<div class='sideMenuItem'><a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+escenaMatch[1]+"</a></div>";
 		}
 		if(accionMatch){
-            lasAcciones.innerHTML+="<a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+accionMatch[1]+"</a><hr/>";;
+            lasAcciones.innerHTML+="<div class='sideMenuItem'><a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+accionMatch[1]+"</a></div>";;
             }
+		if(varMatch){
+			var valores=varMatch[3].split("+");
+			for(var i=0;i<=valores.length;i++){
+				if(!variables.includes(valores[i])){
+					variables.push(valores[i]);
+					lasVariables.innerHTML+="<div class='sideMenuItem'><a href=\"#\">&nbsp;"+valores[i]+"</a></div>";
+				}
+            }
+		}
     });
 }
 
