@@ -18466,6 +18466,7 @@ var condicionales={};
 var lvariables={};
 var variables=[];
 var lacciones={};
+var test;
 function listaEscenasAcciones(){
     var data=simplemde.value();
 	var lasEscenas=document.getElementById("las-escenas");
@@ -18480,7 +18481,7 @@ function listaEscenasAcciones(){
     var tituloRegex = /^\#\ \[(.*)\]\(\/(.*)\)$/;
     var escenaRegex = /^\#\#\ (.*)$/;
     var accionRegex = /^\#\#\#\ (.*)$/;
-	var	varRegex = /\[(.*?)\]\((.*)\#(.*?)\)/;
+	var	varRegex = /\[(.*?)\]\((.*?)\#(.*?)\)/g;
 	var condicionalesRegex = /\[(.*?)\]\((.*?)\?(.*?)(\s|\#|\))/;
     var firstLine=true;
 	variables=[];
@@ -18515,7 +18516,6 @@ function listaEscenasAcciones(){
             lasAcciones.innerHTML+="<div class='sideMenuItem'><a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+accionMatch[1]+"</a></div>";;
         }
 		if(varMatch && typeof varMatch[3]!="undefined"){
-			console.log(varMatch[3]);
 			var trans=varMatch[3].toString();
 			var valores=trans.split("+");
 			for(var i=0;i<=valores.length;i++){
