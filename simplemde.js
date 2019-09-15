@@ -18528,12 +18528,12 @@ function listaEscenasAcciones(){
     variables.sort();
     for(var i=0;i<variables.length;i++){
     	if(typeof variables[i]!="undefined"){
-    		lasVariables.innerHTML+="<div class='sideMenuItem'>&nbsp;<b>#"+variables[i]+"</b></div>";	
+    		lasVariables.innerHTML+="<div class='sideMenuItem variables'>&nbsp;<b>#"+variables[i]+"</b></div>";	
     	}
     }
     for(var i=0;i<variables.length;i++){
     	if(typeof variables[i]!="undefined" && condicionales.hasOwnProperty(variables[i])){
-    		var brutoCondicionales="<div class='sideMenuItem'>&nbsp;?"+variables[i]+": ";
+    		var brutoCondicionales="<div class='sideMenuItem condicionales'>&nbsp;?"+variables[i]+": ";
     		var firstCon=true;
     		var conteo=condicionales[variables[i]].length;
     		for(var e=0;e<conteo;e++){
@@ -18550,6 +18550,10 @@ function listaEscenasAcciones(){
     		lasCondicionales.innerHTML+=brutoCondicionales;
     	}
     }
+    buscarEscenas();
+    buscarAcciones();
+    buscarVariables();
+    buscarCondicionales();
 }
 
 
@@ -18561,5 +18565,92 @@ function jumpToLine(i) {
     var t = editor.charCoords({line: i, ch: 0}, "local").top; 
     var middleHeight = editor.getScrollerElement().offsetHeight / 55; 
     editor.scrollTo(null, t - middleHeight - 5);
-} 
+}
 
+function buscarEscenas(){
+	// Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('bescenas');
+  ul=document.getElementById('las-escenas');
+  li=ul.getElementsByTagName('div');
+  filter = input.value.toUpperCase();
+ /* ul = document.getElementById("myUL");
+  li = ul.getElementsByTagName('li');*/
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+
+function buscarAcciones(){
+	// Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('bacciones');
+  ul=document.getElementById('las-acciones');
+  li=ul.getElementsByTagName('div');
+  filter = input.value.toUpperCase();
+ /* ul = document.getElementById("myUL");
+  li = ul.getElementsByTagName('li');*/
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+
+function buscarVariables(){
+	// Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('bvariables');
+  ul=document.getElementById('las-variables');
+  li=ul.getElementsByTagName('div');
+  filter = input.value.toUpperCase();
+ /* ul = document.getElementById("myUL");
+  li = ul.getElementsByTagName('li');*/
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+
+function buscarCondicionales(){
+	// Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('bcondicionales');
+  ul=document.getElementById('las-condicionales');
+  li=ul.getElementsByClassName('sideMenuItem');
+  filter = input.value.toUpperCase();
+ /* ul = document.getElementById("myUL");
+  li = ul.getElementsByTagName('li');*/
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}

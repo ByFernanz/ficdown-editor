@@ -26,16 +26,20 @@ Esta es la primera escena, contiene un enlace a la [segunda escena](/segunda-esc
 Esta es la segunda escena, contiene un enlace a la [primera escena](/primera-escena).</textarea>
 <div class="lista-general">
 	<div class="titulo-escenas">ESCENAS</div>
+	<div class="divbuscar"><input class="bvariables" placeholder="Buscar..." type="text" id="bescenas"></div>
 	<div id="las-escenas" class="las-escenas"></div>
 	<div class="titulo-acciones">ACCIONES</div>
+	<div class="divbuscar"><input class="bvariables" placeholder="Buscar..." type="text" id="bacciones"></div>
 	<div id="las-acciones" class="las-acciones"></div>
 </div>
 <div class="lista-variables">
 	<div class="titulo-variables">VARIABLES</div>
+	<div class="divbuscar"><input class="bvariables" placeholder="Buscar..." type="text" id="bvariables"></div>
 	<div id="las-variables" class="las-variables"></div>
 	<div class="titulo-variables">CONDICIONALES</div>
+	<div class="divbuscar"><input class="bvariables" placeholder="Buscar..." type="text" id="bcondicionales"></div>
 	<div id="las-condicionales" class="las-condicionales"></div>
-<!--	<div class="titulo-acciones">ACCIONES</div>
+<!--<div class="titulo-acciones">ACCIONES</div>
 	<div id="las-acciones" class="las-acciones"></div>-->
 </div></section>
 
@@ -65,6 +69,10 @@ Esta es la segunda escena, contiene un enlace a la [primera escena](/primera-esc
 	simplemde.codemirror.setOption('lineNumbers', true);
 	document.getElementById('files').addEventListener('change', handleFileSelect, false);
 	simplemde.codemirror.on("change",listaEscenasAcciones);
+	document.getElementById('bescenas').addEventListener('keyup', buscarEscenas, false);
+	document.getElementById('bacciones').addEventListener('keyup', buscarAcciones, false);
+	document.getElementById('bvariables').addEventListener('keyup', buscarVariables, false);
+	document.getElementById('bcondicionales').addEventListener('keyup', buscarCondicionales, false);
 	</script>
 <div id="overlay"></div>
 <div id="playpopup" class="container">
