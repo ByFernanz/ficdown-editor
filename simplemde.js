@@ -18528,11 +18528,16 @@ function listaEscenasAcciones(){
     for(var i=0;i<variables.length;i++){
     	if(typeof variables[i]!="undefined" && condicionales.hasOwnProperty(variables[i])){
     		var brutoCondicionales="<div class='sideMenuItem'>&nbsp;"+variables[i]+": ";
+    		var firstCon=true;
     		var conteo=condicionales[variables[i]].length;
     		for(var e=0;e<conteo;e++){
     			if(typeof condicionales[variables[i]][e]!="undefined"){
-    				console.log(condicionales[variables[i]][e]);
-    				brutoCondicionales+="<a href=\"#\" onclick=\"jumpToLine("+condicionales[variables[i]][e]+")\">"+(condicionales[variables[i]][e]+1)+"</a>, ";
+    				if(firstCon){
+    					brutoCondicionales+="<a href=\"#\" onclick=\"jumpToLine("+condicionales[variables[i]][e]+")\">"+(condicionales[variables[i]][e]+1)+"</a>";
+    					firstCon=false;
+    				}else{
+    					brutoCondicionales+=", <a href=\"#\" onclick=\"jumpToLine("+condicionales[variables[i]][e]+")\">"+(condicionales[variables[i]][e]+1)+"</a>";
+    				}
     			}
     		}
     		brutoCondicionales+="</div>";
