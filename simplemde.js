@@ -18480,7 +18480,7 @@ function listaEscenasAcciones(){
     var tituloRegex = /^\#\ \[(.*)\]\(\/(.*)\)$/;
     var escenaRegex = /^\#\#\ (.*)$/;
     var accionRegex = /^\#\#\#\ (.*)$/;
-	var	varRegex = /\[(.*?)\]\((.*?)\#(.*?)\)/;
+	var	varRegex = /\[(.*?)\]\((.*)\#(.*?)\)/;
 	var condicionalesRegex = /\[(.*?)\]\((.*?)\?(.*?)(\s|\#|\))/;
     var firstLine=true;
 	variables=[];
@@ -18515,10 +18515,11 @@ function listaEscenasAcciones(){
             lasAcciones.innerHTML+="<div class='sideMenuItem'><a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+accionMatch[1]+"</a></div>";;
         }
 		if(varMatch && typeof varMatch[3]!="undefined"){
+			console.log(varMatch[3]);
 			var trans=varMatch[3].toString();
 			var valores=trans.split("+");
 			for(var i=0;i<=valores.length;i++){
-				if(!variables.includes(valores[i]) && typeof valores[i]!="undefined"){
+				if(!lvariables.hasOwnProperty(valores[i]) && typeof valores[i]!="undefined"){
 					lvariables[valores[i]]=[linea];
 					variables.push(valores[i]);
 				}else{
