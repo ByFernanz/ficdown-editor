@@ -18460,22 +18460,27 @@ function str_replace(haystack, needle, replacement) {
   var temp = haystack.split(needle);
   return temp.join(replacement);
 }
-
+	var condicionales={};
+	var variables=[];
 function listaEscenasAcciones(){
     var data=simplemde.value();
 	var lasEscenas=document.getElementById("las-escenas");
 	var lasAcciones=document.getElementById("las-acciones");
 	var lasVariables=document.getElementById("las-variables");
+	var lasCondicionales=document.getElementById("las-condicionales");
 	lasEscenas.innerHTML="";
 	lasAcciones.innerHTML="";
 	lasVariables.innerHTML="";
+	lasCondicionales.innerHTML="";
     var lines = data.replace(/\r/g, '').split('\n');
     var tituloRegex = /^\#\ \[(.*)\]\(\/(.*)\)$/;
     var escenaRegex = /^\#\#\ (.*)$/;
     var accionRegex = /^\#\#\#\ (.*)$/;
 	var	varRegex = /\[(.*?)\]\((.*?)\#(.*?)\)/;
+	var condicionalesRegex = /\[(.*?)\]\((.*?)\?(.*?)(\s|\#|\))/;
     var firstLine=true;
-	var variables=[];
+	variables=[];
+	condicionales={};
     lines.forEach(function(line,index){
 		var linea=index;
         var stripLine = line.trim();
@@ -18488,22 +18493,52 @@ function listaEscenasAcciones(){
         var escenaMatch = escenaRegex.exec(stripLine);
         var accionMatch = accionRegex.exec(stripLine);
 		var varMatch = varRegex.exec(stripLine);
+		var condicionalesMatch = condicionalesRegex.exec(stripLine);
         if(escenaMatch){
             lasEscenas.innerHTML+="<div class='sideMenuItem'><a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+escenaMatch[1]+"</a></div>";
 		}
 		if(accionMatch){
             lasAcciones.innerHTML+="<div class='sideMenuItem'><a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+accionMatch[1]+"</a></div>";;
             }
-		if(varMatch){
+		if(varMatch && typeof varMatch[3]!="undefined"){
 			var valores=varMatch[3].split("+");
 			for(var i=0;i<=valores.length;i++){
-				if(!variables.includes(valores[i])){
+				if(!variables.includes(valores[i]) && typeof valores[i]!="undefined"){
 					variables.push(valores[i]);
 					lasVariables.innerHTML+="<div class='sideMenuItem'><a href=\"#\">&nbsp;"+valores[i]+"</a></div>";
 				}
             }
 		}
+		if(condicionalesMatch && typeof condicionalesMatch[3]!="undefined"){
+			var trans=condicionalesMatch[3].toString();
+			trans=trans.replace("!","");
+			trans=trans.replace("&!","&");
+			var valores=trans.split("&");
+			for(var i=0;i<=valores.length;i++){
+				if(!condicionales.hasOwnProperty(valores[i]) && typeof valores[i]!="undefined"){
+					condicionales[valores[i]]=[linea];
+				}else{
+					if(typeof valores[i]!="undefined"){
+						condicionales[valores[i]].push(linea);
+					}
+				}
+            }
+		}
     });
+    for(var i=0;i<variables.length;i++){
+    	if(typeof variables[i]!="undefined" && condicionales.hasOwnProperty(variables[i])){
+    		var brutoCondicionales="<div class='sideMenuItem'>&nbsp;"+variables[i]+": ";
+    		var conteo=condicionales[variables[i]].length;
+    		for(var e=0;e<conteo;e++){
+    			if(typeof condicionales[variables[i]][e]!="undefined"){
+    				console.log(condicionales[variables[i]][e]);
+    				brutoCondicionales+="<a href=\"#\" onclick=\"jumpToLine("+condicionales[variables[i]][e]+")\">"+(condicionales[variables[i]][e]+1)+"</a>, ";
+    			}
+    		}
+    		brutoCondicionales+="</div>";
+    		lasCondicionales.innerHTML+=brutoCondicionales;
+    	}
+    }
 }
 
 

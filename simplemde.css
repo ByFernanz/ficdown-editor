@@ -561,6 +561,24 @@ padding: 0;
 margin: 0;
 }
 
+.las-condicionales{
+overflow-x: auto;
+overflow-y: auto;
+background-color: transparent;
+text-align: left;
+font-family: 'AnonymousPro',monospace;
+font-size: 100%;
+overflow-x: auto;
+overflow-y: auto;
+width: 100%;
+height:47%;
+top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+padding: 0;
+margin: 0;
+}
 .editor-toolbar:after,
 .editor-toolbar:before {
     display: block;
@@ -857,7 +875,7 @@ margin: 0;
   font-size: 150%;
 }
 
-.lista-general a{text-decoration: none; color: blue;}
+.lista-general a{text-decoration: none; color: green;}
 
 .lista-variables a{text-decoration: none; color: black;}
 
