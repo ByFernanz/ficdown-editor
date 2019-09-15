@@ -18505,7 +18505,7 @@ function listaEscenasAcciones(){
 			for(var i=0;i<=valores.length;i++){
 				if(!variables.includes(valores[i]) && typeof valores[i]!="undefined"){
 					variables.push(valores[i]);
-					lasVariables.innerHTML+="<div class='sideMenuItem'><a href=\"#\">&nbsp;"+valores[i]+"</a></div>";
+					lasVariables.innerHTML+="<div class='sideMenuItem'>&nbsp;<b>#"+valores[i]+"</b></div>";
 				}
             }
 		}
@@ -18527,7 +18527,7 @@ function listaEscenasAcciones(){
     });
     for(var i=0;i<variables.length;i++){
     	if(typeof variables[i]!="undefined" && condicionales.hasOwnProperty(variables[i])){
-    		var brutoCondicionales="<div class='sideMenuItem'>&nbsp;"+variables[i]+": ";
+    		var brutoCondicionales="<div class='sideMenuItem'>&nbsp;?"+variables[i]+": ";
     		var firstCon=true;
     		var conteo=condicionales[variables[i]].length;
     		for(var e=0;e<conteo;e++){
