@@ -18460,8 +18460,11 @@ function str_replace(haystack, needle, replacement) {
   var temp = haystack.split(needle);
   return temp.join(replacement);
 }
-	var condicionales={};
-	var variables=[];
+
+
+var condicionales={};
+var lvariables={};
+var variables=[];
 function listaEscenasAcciones(){
     var data=simplemde.value();
 	var lasEscenas=document.getElementById("las-escenas");
@@ -18481,6 +18484,7 @@ function listaEscenasAcciones(){
     var firstLine=true;
 	variables=[];
 	condicionales={};
+	lvariables={};
     lines.forEach(function(line,index){
 		var linea=index;
         var stripLine = line.trim();
@@ -18501,11 +18505,16 @@ function listaEscenasAcciones(){
             lasAcciones.innerHTML+="<div class='sideMenuItem'><a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+accionMatch[1]+"</a></div>";;
             }
 		if(varMatch && typeof varMatch[3]!="undefined"){
-			var valores=varMatch[3].split("+");
+			var trans=varMatch[3].toString();
+			var valores=trans.split("+");
 			for(var i=0;i<=valores.length;i++){
 				if(!variables.includes(valores[i]) && typeof valores[i]!="undefined"){
+					lvariables[valores[i]]=[linea];
 					variables.push(valores[i]);
-					/*lasVariables.innerHTML+="<div class='sideMenuItem'>&nbsp;<b>#"+valores[i]+"</b></div>";*/
+				}else{
+					if(typeof valores[i]!="undefined"){
+						lvariables[valores[i]].push(linea);
+					}
 				}
             }
 		}
@@ -18527,10 +18536,25 @@ function listaEscenasAcciones(){
     });
     variables.sort();
     for(var i=0;i<variables.length;i++){
-    	if(typeof variables[i]!="undefined"){
-    		lasVariables.innerHTML+="<div class='sideMenuItem variables'>&nbsp;<b>#"+variables[i]+"</b></div>";	
+    	if(typeof variables[i]!="undefined" && lvariables.hasOwnProperty(variables[i])){
+    		var brutoVariables="<div class='sideMenuItem'>&nbsp;<b>#"+variables[i]+"</b> ";
+    		var firstCon=true;
+    		var conteo=lvariables[variables[i]].length;
+    		for(var e=0;e<conteo;e++){
+    			if(typeof lvariables[variables[i]][e]!="undefined"){
+    				if(firstCon){
+    					brutoVariables+="<a href=\"#\" onclick=\"jumpToLine("+lvariables[variables[i]][e]+")\">"+(lvariables[variables[i]][e]+1)+"</a>";
+    					firstCon=false;
+    				}else{
+    					brutoVariables+=", <a href=\"#\" onclick=\"jumpToLine("+lvariables[variables[i]][e]+")\">"+(lvariables[variables[i]][e]+1)+"</a>";
+    				}
+    			}
+    		}
+    		brutoVariables+="</div>";
+    		lasVariables.innerHTML+=brutoVariables;
     	}
     }
+    
     for(var i=0;i<variables.length;i++){
     	if(typeof variables[i]!="undefined" && condicionales.hasOwnProperty(variables[i])){
     		var brutoCondicionales="<div class='sideMenuItem condicionales'>&nbsp;?"+variables[i]+": ";

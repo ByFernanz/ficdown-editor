@@ -18465,6 +18465,7 @@ function str_replace(haystack, needle, replacement) {
 var condicionales={};
 var lvariables={};
 var variables=[];
+var lacciones={};
 function listaEscenasAcciones(){
     var data=simplemde.value();
 	var lasEscenas=document.getElementById("las-escenas");
@@ -18485,6 +18486,7 @@ function listaEscenasAcciones(){
 	variables=[];
 	condicionales={};
 	lvariables={};
+	lacciones={};
     lines.forEach(function(line,index){
 		var linea=index;
         var stripLine = line.trim();
@@ -18502,8 +18504,16 @@ function listaEscenasAcciones(){
             lasEscenas.innerHTML+="<div class='sideMenuItem'><a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+escenaMatch[1]+"</a></div>";
 		}
 		if(accionMatch){
+			var normalizado=normalize(accionMatch[1]);
+			if(!lacciones.hasOwnProperty(normalizado)){
+				lacciones[normalizado]=[linea];
+			}else{
+				if(typeof valores[i]!="undefined"){
+					lacciones[normalizado].push(linea);
+				}
+			}
             lasAcciones.innerHTML+="<div class='sideMenuItem'><a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+accionMatch[1]+"</a></div>";;
-            }
+        }
 		if(varMatch && typeof varMatch[3]!="undefined"){
 			var trans=varMatch[3].toString();
 			var valores=trans.split("+");
@@ -18537,7 +18547,11 @@ function listaEscenasAcciones(){
     variables.sort();
     for(var i=0;i<variables.length;i++){
     	if(typeof variables[i]!="undefined" && lvariables.hasOwnProperty(variables[i])){
+    		if(lacciones.hasOwnProperty(variables[i])){
+    		var brutoVariables="<div class='sideMenuItem'><b><a style='color: red;' href=\"#\" onclick=\"jumpToLine("+lacciones[variables[i]]+")\">&nbsp;#"+variables[i]+"</a></b> ";
+    		}else{
     		var brutoVariables="<div class='sideMenuItem'>&nbsp;<b>#"+variables[i]+"</b> ";
+    		}
     		var firstCon=true;
     		var conteo=lvariables[variables[i]].length;
     		for(var e=0;e<conteo;e++){
