@@ -509,13 +509,13 @@ margin: 0;
 }
 
 .las-acciones{
-
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
 background-color: transparent;
 text-align: left;
 font-family: 'AnonymousPro',monospace;
 font-size: 100%;
-overflow-x: auto;
-overflow-y: auto;
 width: 100%;
 height:40.5%;
 top: 47%;
@@ -886,7 +886,20 @@ margin: 0;
 
 .sideMenuItem{
  border-bottom:1px solid gray;
- width: 500%;
 }
 .las-condicionales a{text-decoration: none;color:green;}
 .las-variables a{text-decoration: none;color:green;}
+
+#actionContainer{
+overflow-x: auto;
+overflow-y: auto;
+width: 100%;
+height:47%;
+top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+padding: 0;
+margin: 0; 
+ 
+}

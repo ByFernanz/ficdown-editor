@@ -24,4 +24,4 @@ makePlayable=function(e){
 			for(a=0,r=(n=$("code.playable")).length;a<r;a++)
 				e=n[a],makePlayable(e);
 			return $("#gameclose").click(function(){return closeGame(),!1}),$("#overlay").click(function(){return closeGame()}),
-				$("#preview").click(function(){try{playGame(simplemde.value())}catch(e){e,alert("There was an error, which could mean a bug in Ficdown.js or a problem with your story.")}return!1})});
+				$("#preview").click(function(){try{juego=playGame(simplemde.value())}catch(e){e,alert("There was an error, which could mean a bug in Ficdown.js or a problem with your story.")}return!1})});
