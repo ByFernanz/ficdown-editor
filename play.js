@@ -10,7 +10,7 @@ playGame=function(e){
 	return a=parseText(e),
 		$("#overlay").show(),
 		$("#playpopup").show(),
-		player=new Player(a,"gamecontent",'<br><center>COMENZAR A JUGAR</center>','## FIN\n\nEl juego ha terminado.', true, true),
+		player=new Player(a,"gamecontent",'<br><center>COMENZAR A JUGAR</center>','## FIN\n\nEl juego ha terminado.', false, debugAct),
 		player.play()
 },
 closeGame=function(){
@@ -24,5 +24,22 @@ makePlayable=function(e){
 			var e,a,r,n;
 			for(a=0,r=(n=$("code.playable")).length;a<r;a++)
 				e=n[a],makePlayable(e);
-			return $("#gameclose").click(function(){return closeGame(),!1}),$("#overlay").click(function(){return closeGame()}),
-				$("#preview").click(function(){try{juego=playGame(simplemde.value())}catch(e){e,alert("There was an error, which could mean a bug in Ficdown.js or a problem with your story.")}return!1})});
+			return $("#gameclose").click(function(){return closeGame(),!1}),$("#overlay").click(function(){return closeGame()})});
+
+function reproducirJuego(){				
+	debugAct=false;
+	try{
+		playGame(simplemde.value());
+	}catch{
+		alert("There was an error, which could mean a bug in Ficdown.js or a problem with your story.")
+	}
+}
+
+function depurarJuego(){				
+	debugAct=true;
+	try{
+		playGame(simplemde.value());
+	}catch{
+		alert("There was an error, which could mean a bug in Ficdown.js or a problem with your story.")
+	}
+}

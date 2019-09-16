@@ -907,3 +907,124 @@ top: 0;
 padding: 0;
 margin: 0; 
 }
+
+.debug{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    padding: 0px;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+	width: 80%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    border-bottom: 2px solid black;
+    background-color: white;
+    margin-right:auto;
+    margin-left:auto;
+}
+
+.titulo-debug{
+display: flex;
+justify-content: center; /* align horizontal */
+align-items: center; 
+border-bottom: 2px solid black;
+color: white;
+width:100%;
+background-color: red;
+/*font-family: 'Annie',sans-serif;*/
+font-family: 'AnonymousPro',monospace;
+  font-weight: 500;
+  font-size: 100%;
+  text-align: center;
+height:3%;
+	top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;	
+}
+
+.titulo-escena-actual{
+display: block;
+float: left; 
+border-bottom: 2px solid black;
+color: white;
+width:50%;
+background-color: black;
+/*font-family: 'Annie',sans-serif;*/
+font-family: 'AnonymousPro',monospace;
+  font-weight: 500;
+  font-size: 80%;
+  text-align: center;
+height:3%;
+	top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;	
+}
+
+.escena-actual{
+display: block; 
+border-bottom: 1px solid black;
+color: black;
+width:50%;
+background-color: white;
+/*font-family: 'Annie',sans-serif;*/
+font-family: 'AnonymousPro',monospace;
+  font-weight: 500;
+  font-size: 80%;
+  text-align: center;
+height:3%;
+	top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.titulo-estado{
+display: flex;
+justify-content: center; /* align horizontal */
+align-items: center; 
+border-bottom: 2px solid black;
+color: white;
+width:100%;
+background-color: blue;
+/*font-family: 'Annie',sans-serif;*/
+font-family: 'AnonymousPro',monospace;
+  font-weight: 500;
+  font-size: 80%;
+  text-align: center;
+height:3%;
+	top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;	
+}
+#gamecontent .debug ul{
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+overflow-y: auto;
+text-align: left;
+list-style-type: disc;
+font-family: 'AnonymousPro',monospace;
+margin-top: 0.5em;
+margin-bottom: 0px !important;
+margin-left: 0;
+margin-right: 0;
+padding-left: 25px;
+height: 150px; 
+max-width: 100%;
+}
+
+.debug li{
+display: list-item;
+margin-right: 25px;
+}

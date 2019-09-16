@@ -1,6 +1,4 @@
-var Player, blockToAction, blockToScene, conditionsMet, extractBlocks, getBlockType, matchAnchor, matchAnchors, matchHref, normalize, parseBlocks, parseText, regexLib, splitAltText, toBoolHash, trimText, scrollAct=true, debugAct=false;
-
-element=document.getElementById('main');
+var Player, blockToAction, blockToScene, conditionsMet, extractBlocks, getBlockType, matchAnchor, matchAnchors, matchHref, normalize, parseBlocks, parseText, regexLib, splitAltText, toBoolHash, trimText, scrollAct=true, debugAct=false, element;
 
 parseText = function(text) {
   var blocks, lines, story;
@@ -171,7 +169,7 @@ Player = (function() {
     startHtml=startHtml.replace("</audio> -->","</audio>");
     startHtml=startHtml.replace("</audio></p>","</audio>");
     if(debugAct==true){
-    	startHtml+="<div class=\"debug\"><div class=\"titulo-debug\">MODO DE DEPURACIÓN</div></div>";
+    	startHtml+="<div id=\"debug\" class=\"debug\"><div class=\"titulo-debug\">MODO DE DEPURACIÓN</div></div>";
     }
     this.container.html(startHtml);
     return this.wireLinks();
@@ -220,6 +218,7 @@ Player = (function() {
     }
     description = description.replace(regexLib.emptyListItem, '');
     return description;
+
   };
 
   Player.prototype.disableOldLinks = function() {
@@ -294,11 +293,14 @@ Player = (function() {
         }
       }
     }
+    //prueba
     if (matchedScene != null) {
       this.currentScene = matchedScene;
+      
     }
     newScene = $.extend({}, this.currentScene);
     newScene.description = this.resolveDescription(newScene.description);
+    
     this.disableOldLinks();
     newContent = "";
     if (newScene.name != null) {
@@ -312,12 +314,11 @@ Player = (function() {
     newHtml = this.processHtml(newScene.id, this.converter.makeHtml(newContent));
     this.visitedScenes[newScene.id] = true;
     scrollId = "move-" + (this.moveCounter++);
-    if(scrollAct==false){
-      document.getElementById(player.id).innerHTML='';
-    }
+    
     // Informacion de debug
-        if(debugAct==true){
-    	newHtml+="<div class=\"debug\"><div class=\"titulo-debug\">MODO DE DEPURACIÓN</div>";
+    	if(debugAct==true){
+    	document.getElementById("debug").remove();
+    	newHtml+="<div id=\"debug\" class=\"debug\"><div class=\"titulo-debug\">MODO DE DEPURACIÓN</div><div class=\"titulo-escena-actual\">ESCENA ACTUAL</div><div class=\"escena-actual\">&nbsp;"+this.currentScene["key"]+"</div>";
     	var primeraLinea=true;
     	if(JSON.stringify(this.playerState) !=false){
     	for(var estado in this.playerState){
@@ -335,7 +336,6 @@ Player = (function() {
     	}
     	newHtml+="</div>";
     }
-    console.log(newHtml);
     // fin de debug
     this.container.append($('<span/>').attr('id', scrollId));
     newHtml=newHtml.replace("<!--<script","<script");
@@ -362,15 +362,20 @@ Player = (function() {
     newHtml=newHtml.replace("</audio>-->","</audio>");
     newHtml=newHtml.replace("</audio> -->","</audio>");
     newHtml=newHtml.replace("</audio></p>","</audio>");
-    this.container.append(newHtml);
-    if(scrollAct==false){
-      pfadeIn(element,400);
+   if(scrollAct==false){
+      pfadeIn(this.id,400);
     }
+    if(scrollAct==false){
+      document.getElementById(this.id).innerHTML='';
+    }
+    this.container.append(newHtml);
     this.wireLinks();
     this.checkGameOver();
-    return this.container.parent('.container').animate({
-      scrollTop: $("#" + scrollId).offset().top - this.container.offset().top
-    }, 1000);
+    if(scrollAct==true){
+    	return this.container.parent('.container').animate({
+     	 scrollTop: $("#" + scrollId).offset().top - this.container.offset().top
+   		 }, 1000);
+    }
   };
 
   return Player;
@@ -492,9 +497,9 @@ splitAltText = function(text) {
   }
 };
 
-function pfadeIn(el, time) {
+function pfadeIn(element, time) {
+  var el=document.getElementById(element);
   el.style.opacity = 0;
-
   var last = +new Date();
   var tick = function() {
     el.style.opacity = +el.style.opacity + (new Date() - last) / time;

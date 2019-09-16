@@ -17383,7 +17383,14 @@ var toolbarBuiltInButtons = {
 		name: "preview",
 		action: null,
     className: "fa fa-bug",
-		title: "Probar historia",
+		title: "Depurar historia",
+		default: true
+  },
+  	"play-game": {
+		name: "play-game",
+		action: null,
+    className: "fa fa-play",
+		title: "Reproducir historia",
 		default: true
   },
   "savetext": {

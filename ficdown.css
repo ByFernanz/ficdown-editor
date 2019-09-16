@@ -8,6 +8,8 @@ textarea{font-family:'Merriweather',serif;}
 	width: 90%;
 	margin: auto;	
 	padding: 0%;
+	opacity: 1;
+	font-size:130%;
 }
 #gamecontent h1{
 	font-weight:700;font-size:250%;margin-top:15px;text-align: center;
@@ -28,7 +30,9 @@ textarea{font-family:'Merriweather',serif;}
 	font-weight:700
 }
 #gamecontent a{
-	#0000FF;text-decoration:underline;
+text-decoration:none;
+font-weight: 500;
+	
 }
 #gamecontent a:hover{
 	color:#f00
@@ -38,12 +42,16 @@ textarea{font-family:'Merriweather',serif;}
 }
 #gamecontent a.disabled.chosen,#gamecontent a.disabled:hover.chosen{
 	color: #000;
+	text-decoration:underline;
 }
 
-ul{
-	max-width: 50%;
+#gamecontent ul{
+	max-width: 80%;
 	text-align: center;
 	margin: auto;
 	margin-top: 2em;
 	list-style-type: none;
+	font-weight: 500;
+	margin-bottom: 1em;
 }
+
