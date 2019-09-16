@@ -1,4 +1,4 @@
-var closeGame,loadGame,makePlayable,playGame;
+var closeGame,loadGame,makePlayable,playGame,player;
 
 loadGame=function(e){
 	var a;
@@ -10,7 +10,8 @@ playGame=function(e){
 	return a=parseText(e),
 		$("#overlay").show(),
 		$("#playpopup").show(),
-		new Player(a,"gamecontent",'<br><center>COMENZAR A JUGAR</center>','## FIN\n\nEl juego ha terminado.', true).play()
+		player=new Player(a,"gamecontent",'<br><center>COMENZAR A JUGAR</center>','## FIN\n\nEl juego ha terminado.', true, true),
+		player.play()
 },
 closeGame=function(){
 	return $("#gamecontent").empty(),

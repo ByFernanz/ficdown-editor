@@ -1,4 +1,4 @@
-var Player, blockToAction, blockToScene, conditionsMet, extractBlocks, getBlockType, matchAnchor, matchAnchors, matchHref, normalize, parseBlocks, parseText, regexLib, splitAltText, toBoolHash, trimText, scrollAct=true;
+var Player, blockToAction, blockToScene, conditionsMet, extractBlocks, getBlockType, matchAnchor, matchAnchors, matchHref, normalize, parseBlocks, parseText, regexLib, splitAltText, toBoolHash, trimText, scrollAct=true, debugAct=false;
 
 element=document.getElementById('main');
 
@@ -114,9 +114,12 @@ blockToAction = function(block) {
 };
 
 Player = (function() {
-  function Player(story, id, startText, endText,scrollText) {
-    if (scrollText != null & scrollText != true){
+  function Player(story, id, startText, endText,scrollText,debug) {
+    if (scrollText != null && scrollText != true){
       scrollAct=false;
+    }
+    if (debug != null && debug != false){
+      debugAct=true;
     }
     var i, key, scene, scenes, _i, _len, _ref;
     this.story = story;
@@ -167,6 +170,9 @@ Player = (function() {
     startHtml=startHtml.replace("</audio>-->","</audio>");
     startHtml=startHtml.replace("</audio> -->","</audio>");
     startHtml=startHtml.replace("</audio></p>","</audio>");
+    if(debugAct==true){
+    	startHtml+="<div class=\"debug\"><div class=\"titulo-debug\">MODO DE DEPURACIÓN</div></div>";
+    }
     this.container.html(startHtml);
     return this.wireLinks();
   };
@@ -309,6 +315,28 @@ Player = (function() {
     if(scrollAct==false){
       document.getElementById(player.id).innerHTML='';
     }
+    // Informacion de debug
+        if(debugAct==true){
+    	newHtml+="<div class=\"debug\"><div class=\"titulo-debug\">MODO DE DEPURACIÓN</div>";
+    	var primeraLinea=true;
+    	if(JSON.stringify(this.playerState) !=false){
+    	for(var estado in this.playerState){
+    			if(primeraLinea==true){
+    				newHtml+="<div class=\"titulo-estado\">ESTADO DEL JUGADOR</div><ul class=\"lista-estado\">";
+    				primeraLinea=false;
+    			}
+    			if(this.playerState[estado]==true){
+    				newHtml+='<li><b>' + estado + '</b></li>';
+    			}
+    	}
+    	}
+    	if(!primeraLinea){
+    		newHtml += '</ul>';
+    	}
+    	newHtml+="</div>";
+    }
+    console.log(newHtml);
+    // fin de debug
     this.container.append($('<span/>').attr('id', scrollId));
     newHtml=newHtml.replace("<!--<script","<script");
     newHtml=newHtml.replace("<!-- <script","<script");
