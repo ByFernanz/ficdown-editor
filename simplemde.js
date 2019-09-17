@@ -17487,14 +17487,14 @@ var toolbarBuiltInButtons = {
 		name: "panel-izquierdo",
 		action: activarPanelIzquierdo,
 		className: "fa fa-caret-square-o-left no-disable",
-    title: "Panel Izquierdo(Escenas, Acciones)",
+    title: "Panel izquierdo (Escenas, Acciones)",
     default: true
   },
   "panel-derecho": {
-		name: "panel-izquierdo",
+		name: "panel-derecho",
 		action: activarPanelDerecho,
 		className: "fa fa-caret-square-o-right no-disable",
-    title: "Panel Izquierdo(Variables, Condicones)",
+    title: "Panel derecho (Variables, Condicones)",
     default: true
   },
   "guide": {
