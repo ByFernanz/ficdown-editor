@@ -17258,14 +17258,14 @@ var toolbarBuiltInButtons = {
   },
 "link": {
 		name: "link",
-		action: toggleLink,
+		action: toggleEnlace,
 		className: "fa fa-link",
 		title: "Crear enlace",
 		default: true
   },
   "image": {
 		name: "image",
-		action: drawImage,
+		action: toggleImagen,
 		className: "fa fa-picture-o",
 		title: "Insertar Imagen",
 		default: true
@@ -18398,6 +18398,30 @@ function toggleCondition(editor) {
   var text = selectedText || '';
 
   output = '[' + text + '](?)';
+  cm.replaceSelection(output);
+
+}
+
+function toggleEnlace(editor) {
+
+  var cm = editor.codemirror;
+  var output = '';
+  var selectedText = cm.getSelection();
+  var text = selectedText || '';
+
+  output = '<a href="http://" target="_blank">' + text + '</a>';
+  cm.replaceSelection(output);
+
+}
+
+function toggleImagen(editor) {
+
+  var cm = editor.codemirror;
+  var output = '';
+  var selectedText = cm.getSelection();
+  var text = selectedText || '';
+
+  output = '<img src="' + text + '"/>';
   cm.replaceSelection(output);
 
 }
