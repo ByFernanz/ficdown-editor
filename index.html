@@ -76,7 +76,7 @@ Esta es la segunda escena, contiene un enlace a la [primera escena](/primera-esc
 	simplemde.toggleFullScreen();
 	simplemde.codemirror.setOption('lineNumbers', true);
 	document.getElementById('files').addEventListener('change', handleFileSelect, false);
-	simplemde.codemirror.on("change",listaEscenasAcciones);
+	simplemde.codemirror.on("change",waitlistaEscenasAcciones);
 	document.getElementById('bescenas').addEventListener('keyup', buscarEscenas, false);
 	document.getElementById('bacciones').addEventListener('keyup', buscarAcciones, false);
 	document.getElementById('bvariables').addEventListener('keyup', buscarVariables, false);

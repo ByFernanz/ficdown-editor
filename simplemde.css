@@ -372,6 +372,7 @@ span.CodeMirror-selectedtext { background: #0066ff; }
 .CodeMirror-fullscreen {
     background: #e9ecef;
     position: fixed !important;
+    /*normal 50px*/
     top: 50px;
     left: 20%;
     right: 0;
