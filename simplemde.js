@@ -4,6 +4,11 @@
  * @link https://github.com/NextStepWebs/simplemde-markdown-editor
  * @license MIT
  */
+ // Variables en precargado
+var panelDerecho=false;
+var panelIzquierdo=true;
+var panel=true;
+// Fin
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.SimpleMDE = f()}})(function(){var define,module,exports;return (function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
 'use strict'
 
@@ -17478,6 +17483,20 @@ var toolbarBuiltInButtons = {
     title: "Rehacer",
     default: true
   },
+  "panel-izquierdo": {
+		name: "panel-izquierdo",
+		action: activarPanelIzquierdo,
+		className: "fa fa-caret-square-o-left no-disable",
+    title: "Panel Izquierdo(Escenas, Acciones)",
+    default: true
+  },
+  "panel-derecho": {
+		name: "panel-izquierdo",
+		action: activarPanelDerecho,
+		className: "fa fa-caret-square-o-right no-disable",
+    title: "Panel Izquierdo(Variables, Condicones)",
+    default: true
+  },
   "guide": {
 		name: "guide",
 		action: "https://byfernanz.github.io/textalab/manuales/manual-de-ficdown.html",
@@ -18475,6 +18494,8 @@ var variables=[];
 var lacciones={};
 var test;
 function listaEscenasAcciones(){
+	var posicion=simplemde.codemirror.getCursor();
+	var lineaActual=simplemde.codemirror.getLine(posicion.line);
     var data=simplemde.value();
 	var lasEscenas=document.getElementById("las-escenas");
 	var lasAcciones=document.getElementById("las-acciones");
@@ -18495,6 +18516,7 @@ function listaEscenasAcciones(){
 	condicionales={};
 	lvariables={};
 	lacciones={};
+	if(panel==true){
     lines.forEach(function(line,index){
 		var linea=index;
         var stripLine = line.trim();
@@ -18509,7 +18531,7 @@ function listaEscenasAcciones(){
         var varMatch = varRegex.exec(stripLine);
         var condicionalesMatch = condicionalesRegex.exec(stripLine);
         
-		
+		if(panelIzquierdo==true){
         if(escenaMatch!= null){
             lasEscenas.innerHTML+="<div class='sideMenuItem'><a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+escenaMatch[1]+"</a></div>";
 		}
@@ -18523,9 +18545,10 @@ function listaEscenasAcciones(){
 				}
 			}
             lasAcciones.innerHTML+="<div class='sideMenuItem'><a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+accionMatch[1]+"</a></div>";;
-        }
-        while (varMatch != null) {
-		if(varMatch && typeof varMatch[3]!="undefined"){
+        }}
+        if(panelDerecho==true){
+        while (varMatch != null){
+		if(typeof varMatch[3]!="undefined"){
 			var trans=varMatch[3].toString();
 			var valores=trans.split("+");
 			for(var i=0;i<=valores.length;i++){
@@ -18540,7 +18563,7 @@ function listaEscenasAcciones(){
             }
 		}varMatch = varRegex.exec(stripLine);}
 		while (condicionalesMatch != null){ 
-		if(condicionalesMatch!= null && typeof condicionalesMatch[3]!="undefined"){
+		if(typeof condicionalesMatch[3]!="undefined"){
 			var trans=condicionalesMatch[3].toString();
 			trans=trans.replace("!","");
 			trans=trans.replace("&!","&");
@@ -18554,10 +18577,11 @@ function listaEscenasAcciones(){
 					}
 				}
             }
-		}condicionalesMatch = condicionalesRegex.exec(stripLine);}
+		}condicionalesMatch = condicionalesRegex.exec(stripLine);}}
 		
 		
     });
+    if(panelDerecho==true){
     variables.sort();
     for(var i=0;i<variables.length;i++){
     	if(typeof variables[i]!="undefined" && lvariables.hasOwnProperty(variables[i])){
@@ -18601,12 +18625,12 @@ function listaEscenasAcciones(){
     		brutoCondicionales+="</div>";
     		lasCondicionales.innerHTML+=brutoCondicionales;
     	}
-    }
+    }}
     buscarEscenas();
     buscarAcciones();
     buscarVariables();
     buscarCondicionales();
-}
+}}
 
 
 
@@ -18705,4 +18729,51 @@ function buscarCondicionales(){
       li[i].style.display = "none";
     }
   }
+}
+
+function activarPanelIzquierdo(){
+	if(panelIzquierdo==true){
+		panelIzquierdo=false;
+		document.getElementById("lista-general").style.display="none";
+		var codigocentral=document.getElementsByClassName("CodeMirror-fullscreen");
+		codigocentral[0].style.left="0";
+		simplemde.codemirror.refresh();
+		if(panelIzquierdo==false && panelDerecho==false){
+			panel=false;
+		}else{
+			panel=true;
+		}
+	}else{
+		panelIzquierdo=true;
+		panel=true;
+		document.getElementById("lista-general").style.display="block";
+		var codigocentral=document.getElementsByClassName("CodeMirror-fullscreen");
+		codigocentral[0].style.left="20%";
+		simplemde.codemirror.refresh();
+	}
+	listaEscenasAcciones();
+
+}
+
+function activarPanelDerecho(){
+	if(panelDerecho==true){
+		panelDerecho=false;
+		document.getElementById("lista-variables").style.display="none";
+		var codigocentral=document.getElementsByClassName("CodeMirror-fullscreen");
+		codigocentral[0].style.right="0";
+		simplemde.codemirror.refresh();
+		if(panelIzquierdo==false && panelDerecho==false){
+			panel=false;
+		}else{
+			panel=true;
+		}
+	}else{
+		panelDerecho=true;
+		panel=true;
+		document.getElementById("lista-variables").style.display="block";
+		var codigocentral=document.getElementsByClassName("CodeMirror-fullscreen");
+		codigocentral[0].style.right="20%";
+		simplemde.codemirror.refresh();
+	}
+	listaEscenasAcciones();
 }

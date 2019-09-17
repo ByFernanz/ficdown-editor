@@ -374,7 +374,7 @@ span.CodeMirror-selectedtext { background: #0066ff; }
     position: fixed !important;
     top: 50px;
     left: 20%;
-    right: 20%;
+    right: 0;
     bottom: 0;
     height: auto;
     z-index: 9;
@@ -428,6 +428,7 @@ span.CodeMirror-selectedtext { background: #0066ff; }
 }
 
 .lista-variables {
+	display: none;
 	background:white;
     position: block;
     -webkit-user-select: none;

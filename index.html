@@ -24,7 +24,7 @@ Esta es la primera escena, contiene un enlace a la [segunda escena](/segunda-esc
 ## Segunda escena
 
 Esta es la segunda escena, contiene un enlace a la [primera escena](/primera-escena).</textarea>
-<div class="lista-general">
+<div id="lista-general" class="lista-general">
 	<div class="titulo-escenas">ESCENAS</div>
 	<div class="divbuscar"><input class="bvariables" placeholder="Buscar..." type="text" id="bescenas"></div>
 	<div class="actionContainer2">
@@ -36,7 +36,7 @@ Esta es la segunda escena, contiene un enlace a la [primera escena](/primera-esc
 		<div id="las-acciones" class="las-acciones">
 	</div></div></div>
 </div>
-<div class="lista-variables">
+<div id="lista-variables" class="lista-variables">
 	<div class="titulo-variables">VARIABLES</div>
 	<div class="divbuscar"><input class="bvariables" placeholder="Buscar..." type="text" id="bvariables"></div>
 	<div class="actionContainer2">
@@ -83,6 +83,7 @@ Esta es la segunda escena, contiene un enlace a la [primera escena](/primera-esc
 	document.getElementById('bcondicionales').addEventListener('keyup', buscarCondicionales, false);
 	document.getElementById('play-game').addEventListener('click', reproducirJuego, false);
 	document.getElementById('preview').addEventListener('click', depurarJuego, false);
+	document.getElementById("lista-variables").style.display="none";
 	</script>
 <div id="overlay"></div>
 <div id="playpopup" class="container">
