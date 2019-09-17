@@ -18489,7 +18489,7 @@ function listaEscenasAcciones(){
     var escenaRegex = /^\#\#\ (.*)$/;
     var accionRegex = /^\#\#\#\ (.*)$/;
 	var	varRegex = /\[(.*?)\]\((.*?)\#(.*?)\)/g;
-	var condicionalesRegex = /\[(.*?)\]\((.*?)\?(.*?)(\s|\#|\))/;
+	var condicionalesRegex = /\[(.*?)\]\((.*?)\?(.*?)(\s|\#|\))/g;
     var firstLine=true;
 	variables=[];
 	condicionales={};
@@ -18506,12 +18506,14 @@ function listaEscenasAcciones(){
         }
         var escenaMatch = escenaRegex.exec(stripLine);
         var accionMatch = accionRegex.exec(stripLine);
-		var varMatch = varRegex.exec(stripLine);
-		var condicionalesMatch = condicionalesRegex.exec(stripLine);
-        if(escenaMatch){
+        var varMatch = varRegex.exec(stripLine);
+        var condicionalesMatch = condicionalesRegex.exec(stripLine);
+        
+		
+        if(escenaMatch!= null){
             lasEscenas.innerHTML+="<div class='sideMenuItem'><a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+escenaMatch[1]+"</a></div>";
 		}
-		if(accionMatch){
+		if(accionMatch!= null){
 			var normalizado=normalize(accionMatch[1]);
 			if(!lacciones.hasOwnProperty(normalizado)){
 				lacciones[normalizado]=[linea];
@@ -18522,6 +18524,7 @@ function listaEscenasAcciones(){
 			}
             lasAcciones.innerHTML+="<div class='sideMenuItem'><a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+accionMatch[1]+"</a></div>";;
         }
+        while (varMatch != null) {
 		if(varMatch && typeof varMatch[3]!="undefined"){
 			var trans=varMatch[3].toString();
 			var valores=trans.split("+");
@@ -18535,8 +18538,9 @@ function listaEscenasAcciones(){
 					}
 				}
             }
-		}
-		if(condicionalesMatch && typeof condicionalesMatch[3]!="undefined"){
+		}varMatch = varRegex.exec(stripLine);}
+		while (condicionalesMatch != null){ 
+		if(condicionalesMatch!= null && typeof condicionalesMatch[3]!="undefined"){
 			var trans=condicionalesMatch[3].toString();
 			trans=trans.replace("!","");
 			trans=trans.replace("&!","&");
@@ -18550,7 +18554,9 @@ function listaEscenasAcciones(){
 					}
 				}
             }
-		}
+		}condicionalesMatch = condicionalesRegex.exec(stripLine);}
+		
+		
     });
     variables.sort();
     for(var i=0;i<variables.length;i++){
