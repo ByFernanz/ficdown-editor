@@ -17456,6 +17456,13 @@ var toolbarBuiltInButtons = {
   "separator-4": {
 		name: "separator-4"
   },
+  /*"busqueda-global": {
+		name: "busqueda-global",
+		action: busquedaGlobal,
+    className: "fa fa-search",
+		title: "Búsqueda global",
+		default: true
+  },*/
   "reducir": {
 		name: "reducir",
 		action: toggleReducir,
@@ -17504,6 +17511,13 @@ var toolbarBuiltInButtons = {
 		className: "fa fa-question-circle",
 		title: "Guía de Ficdown",
 		default: true
+  },
+  "acerca-de": {
+		name: "acerca-de",
+		action: aboutFEditor,
+		className: "fa fa-info-circle no-disable",
+    title: "Acerca de Ficdown Editor",
+    default: true
   },
 	"separator-6": {
 		name: "separator-6"
@@ -18784,4 +18798,45 @@ function waitlistaEscenasAcciones(){
 		espera=true;
 		setTimeout(listaEscenasAcciones,2000);
 	}
+}
+
+function busquedaGlobal(){
+(async () => {
+const { value: formValues } = await Swal.fire({
+  title: 'Buscar y reemplazar',
+  html:
+    '<input id="swal-input1" class="swal2-input" placeholder="Buscar...">' +
+    '<input id="swal-input2" class="swal2-input" placeholder="Reemplazar con...">',
+   showCancelButton: true,
+   cancelButtonText: "Cancelar",
+  
+  focusConfirm: false,
+  preConfirm: () => {
+    return [
+      document.getElementById('swal-input1').value,
+      document.getElementById('swal-input2').value
+    ]
+  }
+})
+
+if (formValues) {
+  Swal.fire(JSON.stringify(formValues))
+}
+
+})()
+}
+
+function aboutFEditor(){
+Swal.fire({
+  title: '<strong>Ficdown Editor <u>v0.7</u></strong>',
+  type: 'info',
+  html:
+    'Editor en línea para <b><a href="https://ficdown.com">Ficdown</a></b>, ' +
+    'basado en <a href="https://github.com/rudism/Ficdown.js">Ficdown.js</a> ' +
+    'y <a href="https://github.com/choelea/simplemde-plus">SimpleMDE Plus</a>' +
+    '<br><br> <i>Creado por <br>Billy Fernández (ByFernanz)</i>',
+  focusConfirm: false,
+  confirmButtonText:
+    'Aceptar'
+})
 }

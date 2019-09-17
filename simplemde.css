@@ -1030,3 +1030,10 @@ max-width: 100%;
 display: list-item;
 margin-right: 25px;
 }
+
+#swal2-content, .swal2-input, .swal2-title, .swal2-confirm, .swal2-styled{
+	font-family: 'AnonymousPro',monospace;
+}
+.swal2-confirm, .swal2-styled{
+	background-color: green !important;
+}
