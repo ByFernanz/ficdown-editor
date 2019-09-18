@@ -18665,6 +18665,9 @@ function listaEscenasAcciones(){
     		lasCondicionales.innerHTML+=brutoCondicionales;
     	}
     }}
+    document.getElementById("titulo-escenas").innerText="ESCENAS: "+document.getElementById("las-escenas").childElementCount;
+    document.getElementById("titulo-acciones").innerText="ACCIONES: "+document.getElementById("las-acciones").childElementCount;
+    document.getElementById("titulo-variables").innerText="VARIABLES: "+document.getElementById("las-variables").childElementCount;
     buscarEscenas();
     buscarAcciones();
     buscarVariables();
