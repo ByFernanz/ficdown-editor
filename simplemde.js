@@ -18573,7 +18573,9 @@ function listaEscenasAcciones(){
 		if(panelIzquierdo==true){
         if(escenaMatch!= null){
             lasEscenas.innerHTML+="<div class='sideMenuItem'><a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+escenaMatch[1]+"</a></div>";
-		}
+		}}
+		
+		if(panelIzquierdo==true || panelDerecho==true){
 		if(accionMatch!= null){
 			var normalizado=normalize(accionMatch[1]);
 			if(!lacciones.hasOwnProperty(normalizado)){
@@ -18583,7 +18585,8 @@ function listaEscenasAcciones(){
 					lacciones[normalizado].push(linea);
 				}
 			}
-            lasAcciones.innerHTML+="<div class='sideMenuItem'><a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+accionMatch[1]+"</a></div>";;
+			if(panelIzquierdo==true){
+            lasAcciones.innerHTML+="<div class='sideMenuItem'><a href=\"#\" onclick=\"jumpToLine("+linea+")\">&nbsp;"+accionMatch[1]+"</a></div>";}
         }}
         if(panelDerecho==true){
         while (varMatch != null){
