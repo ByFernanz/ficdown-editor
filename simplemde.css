@@ -724,30 +724,45 @@ margin: 0;
     }
 }
 
-.editor-statusbar {
+/*.editor-statusbar {
   font-family: 'AnonymousPro',monospace;
     font-size: 16px;
     color: green;
     text-align: right;
     float: right;
-}
+}*/
 
-.editor-statusbar span {
+.editor-statusbar {
+	font-family: 'AnonymousPro',monospace;
+    padding: 8px 10px;
+    font-size: 12px;
+    color: green;
+    text-align: right;
+    font-weight: 600;
+    float: right;
+}
+editor-statusbar span {
     display: inline-block;
     min-width: 4em;
     margin-left: 1em;
 }
 
+/*.editor-statusbar span {
+    display: inline-block;
+    min-width: 4em;
+    margin-left: 1em;
+    margin-top: 7px;
+}*/
 .editor-statusbar .lines:before {
-    content: 'lines: '
+    content: ' LINEAS: '
 }
 
 .editor-statusbar .words:before {
-    content: 'words: '
+    content: 'PALABRAS: '
 }
 
 .editor-statusbar .characters:before {
-    content: 'characters: '
+    content: 'CARACTERES: '
 }
 
 .editor-preview {
