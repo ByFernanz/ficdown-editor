@@ -18512,6 +18512,7 @@ function toggleReducir(){
   var size = str_replace(sizeactual, 'px', '');
   size=parseInt(size)-3;
   $('.CodeMirror-code').css({'fontSize': size});
+  simplemde.codemirror.refresh();
 }
 
 function toggleAumentar(){
@@ -18519,6 +18520,7 @@ function toggleAumentar(){
   var size = str_replace(sizeactual, 'px', '');
   size=parseInt(size)+3;
   $('.CodeMirror-code').css({'fontSize': size});
+  simplemde.codemirror.refresh();
 }
 
 function str_replace(haystack, needle, replacement) {

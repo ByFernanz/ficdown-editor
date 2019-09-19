@@ -86,6 +86,18 @@ Esta es la segunda escena, contiene un enlace a la [primera escena](/primera-esc
 	document.getElementById('play-game').addEventListener('click', reproducirJuego, false);
 	document.getElementById('preview').addEventListener('click', depurarJuego, false);
 	document.getElementById("lista-variables").style.display="none";
+	
+//Actualizar ventana cada vez que cambie de tamaño
+	$(window).resize(function() {
+    if(this.resizeTO) clearTimeout(this.resizeTO);
+    this.resizeTO = setTimeout(function() {
+        $(this).trigger('resizeEnd');
+    }, 500);
+});
+	$(window).bind('resizeEnd', function() {
+    simplemde.codemirror.refresh();
+    console.log("hola");
+});
 	</script>
 <div id="overlay"></div>
 <div id="playpopup" class="container">
