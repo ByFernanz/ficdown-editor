@@ -16197,7 +16197,6 @@ var bindings = {
 	"undo": undo,
 	"redo": redo,
 	"toggleSideBySide": toggleSideBySide,
-	"toggleFullScreen": toggleFullScreen
 };
 
 var shortcuts = {
@@ -16213,8 +16212,7 @@ var shortcuts = {
 	"toggleUnorderedList": "Cmd-L",
 	"toggleCodeBlock": "Cmd-Alt-C",
 	"togglePreview": "Cmd-P",
-	"toggleSideBySide": "F9",
-	"toggleFullScreen": "F11"
+	"toggleSideBySide": "F9"
 };
 
 var getBindingName = function(f) {
@@ -17755,17 +17753,14 @@ SimpleMDE.prototype.render = function(el) {
 	keyMaps["Enter"] = "newlineAndIndentContinueMarkdownList";
 	keyMaps["Tab"] = "tabAndIndentMarkdownList";
 	keyMaps["Shift-Tab"] = "shiftTabAndUnindentMarkdownList";
-	keyMaps["Esc"] = function(cm) {
-		if(cm.getOption("fullScreen")) toggleFullScreen(self);
-	};
 
-	document.addEventListener("keydown", function(e) {
+	/*document.addEventListener("keydown", function(e) {
 		e = e || window.event;
 
 		if(e.keyCode == 27) {
 			if(self.codemirror.getOption("fullScreen")) toggleFullScreen(self);
 		}
-	}, false);
+	}, false);*/
 
 	var mode, backdrop;
 	if(options.spellChecker !== false) {
