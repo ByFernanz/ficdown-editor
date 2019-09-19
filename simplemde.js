@@ -18504,27 +18504,27 @@ function errorHandler(evt) {
     input.addEventListener('change', handleFileSelect, false);
 
 function toggleReducir(){
-  /*var sizeactual = $('.CodeMirror-code').css('fontSize');
+  var sizeactual = $('.CodeMirror-code').css('fontSize');
   var size = str_replace(sizeactual, 'px', '');
   size=parseInt(size)-3;
-  $('.CodeMirror-code').css({'fontSize': size});*/
+  $('.CodeMirror-code').css({'fontSize': size});
   
   /*var sizeactual = $('.CodeMirror-gutters').css('width');
   var size = str_replace(sizeactual, 'px', '');
   size=parseInt(size)-5;
   $('.CodeMirror-gutters').css({'width': size});*/	
-  zoom.replace("%",""); 
+  /*zoom.replace("%",""); 
   zoom = parseInt(zoom) - 10 +'%';
-  document.body.style.zoom = zoom;
+  document.body.style.zoom = zoom;*/
   
   simplemde.codemirror.refresh();
 }
 
 function toggleAumentar(){
-  /*var sizeactual = $('.CodeMirror-line').css('fontSize');
+  var sizeactual = $('.CodeMirror-line').css('fontSize');
   var size = str_replace(sizeactual, 'px', '');
   size=parseInt(size)+3;
-  $('.CodeMirror-code').css({'fontSize': size});*/
+  $('.CodeMirror-code').css({'fontSize': size});
   
   /*var sizeactual =  $('.CodeMirror-sizer').css('margin-left');
   var size = str_replace(sizeactual, 'px', '');
@@ -18535,9 +18535,9 @@ function toggleAumentar(){
   var size = str_replace(sizeactual, 'px', '');
   size=parseInt(size)+5;
   $('.CodeMirror-gutters').css({'width': size});*/
-	zoom.replace("%",""); 
+	/*zoom.replace("%",""); 
     zoom = parseInt(zoom) + 10 +'%';
-    document.body.style.zoom = zoom;
+    document.body.style.zoom = zoom;*/
   
   simplemde.codemirror.refresh();
 }
