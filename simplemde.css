@@ -1052,3 +1052,7 @@ margin-right: 25px;
 .swal2-confirm, .swal2-styled{
 	background-color: green !important;
 }
+
+.simplemde-wrap {
+font-size: 100em;
+}
