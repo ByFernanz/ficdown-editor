@@ -1,8 +1,121 @@
-var Player, blockToAction, blockToScene, conditionsMet, extractBlocks, getBlockType, matchAnchor, matchAnchors, matchHref, normalize, parseBlocks, parseText, regexLib, splitAltText, toBoolHash, trimText, scrollAct=true, debugAct=false, element;
+var Player, blockToAction, blockToScene, conditionsMet, extractBlocks, getBlockType, matchAnchor, matchAnchors, matchHref, normalize, parseBlocks, parseText, regexLib, splitAltText, toBoolHash, trimText, scrollAct=true, debugAct=false, element, preprocessor={},test;
 
 parseText = function(text) {
-  var blocks, lines, story;
+  var blocks, lines, story, headerCount=0, documento=[],preline='';
+  var sceneNoHeader=true,
+  	  sceneNoFooter=true,
+  	  actionNoHeader=true,
+  	  actionNoFooter=true;
+  preprocessor={};
+  preprocessor.sceneHeader="";
+  preprocessor.sceneFooter="";
+  preprocessor.actionHeader="";
+  preprocessor.actionFooter="";
+  preprocessor.constants={};
   lines = text.split(/\n|\r\n/);
+  lines.forEach(function(line,index){
+  	var splitProp;
+    if(line.substring(0,3)=='***' || line.substring(0,3)=='---'){
+      headerCount+=1;
+    }else if(headerCount==1 && line[0]=='@'){
+    	line=line.replace('@','');
+    	splitProp=line.split(': ');
+    	if(splitProp[0]=='scene-header'){
+    		preprocessor.sceneHeader+=splitProp[1];
+    	}else if(splitProp[0]=='scene-footer'){
+    		preprocessor.sceneFooter+=splitProp[1];
+    	}else if(splitProp[0]=='action-header'){
+    		preprocessor.actionHeader+=splitProp[1];
+    	}else if(splitProp[0]=='action-footer'){
+    		preprocessor.actionFooter+=splitProp[1];
+    	}
+    }else if(headerCount==1){
+    	splitProp=line.split(': ');
+    	preprocessor.constants[String(splitProp[0])]=splitProp[1];
+    }else if(headerCount==0 || headerCount>=2){	
+    	if(line.substring(0,3)=='## ' && preline==''){
+    		preline='scene';
+    		documento.push(line);
+    		if(preprocessor.sceneHeader!=''){
+    			documento.push('');
+    			documento.push(preprocessor.sceneHeader);
+    			documento.push('');
+    		}
+    		
+    	}else if(line.substring(0,4)=='### ' && preline==''){
+    		preline='action';
+    		documento.push(line);
+    		if(preprocessor.actionHeader!=''){
+    			documento.push('');
+    			documento.push(preprocessor.actionHeader);
+    			documento.push('');
+    		}
+    		
+    	}else if(line.substring(0,3)=='## ' && preline=='scene'){
+    		preline='scene';
+    		if(preprocessor.sceneFooter!=''){
+    			documento.push('');
+    			documento.push(preprocessor.sceneFooter);
+    			documento.push('');
+    		}
+    		documento.push(line);
+    		if(preprocessor.sceneHeader!=''){
+    			documento.push('');
+    			documento.push(preprocessor.sceneHeader);
+    			documento.push('');
+    		}
+    		
+    	}else if(line.substring(0,4)=='### ' && preline=='action'){
+    		preline='action';
+    		if(preprocessor.actionFooter!=''){
+    			documento.push('');
+    			documento.push(preprocessor.actionFooter);
+    			documento.push('');
+    		}
+    		documento.push(line);
+    		if(preprocessor.actionHeader!=''){
+    			documento.push('');
+    			documento.push(preprocessor.actionHeader);
+    			documento.push('');
+    		}
+    		
+    	}else if(line.substring(0,3)=='## ' && preline=='action'){
+    		preline='scene';
+    		if(preprocessor.actionFooter!=''){
+    			documento.push('');
+    			documento.push(preprocessor.actionFooter);
+    			documento.push('');
+    		}
+    		documento.push(line);
+    		if(preprocessor.sceneHeader!=''){
+    			documento.push('');
+    			documento.push(preprocessor.sceneHeader);
+    			documento.push('');
+    		}
+    		
+    	}else if(line.substring(0,4)=='### ' && preline=='scene'){
+    		preline='action';
+    		if(preprocessor.sceneFooter!=''){
+    			documento.push('');
+    			documento.push(preprocessor.sceneFooter);
+    			documento.push('');
+    		}
+    		documento.push(line);
+    		if(preprocessor.actionHeader!=''){
+    			documento.push('');
+    			documento.push(preprocessor.actionHeader);
+    			documento.push('');
+    		}
+    	}else{
+    		for(prop in  preprocessor.constants){
+    			line = line.replace('__'+prop.toUpperCase()+'__', preprocessor.constants[prop]);
+    		}
+    		documento.push(line);
+    	}
+    }
+  });
+  test=documento;
+  lines=documento;
   blocks = extractBlocks(lines);
   return story = parseBlocks(blocks);
 };
@@ -129,6 +242,7 @@ Player = (function() {
     this.container.addClass('ficdown').data('player', this);
     this.playerState = {};
     this.visitedScenes = {};
+    this.preprocessor=preprocessor;
     this.currentScene = null;
     this.moveCounter = 0;
     i = 0;
@@ -309,7 +423,7 @@ Player = (function() {
     for (_k = 0, _len2 = actions.length; _k < _len2; _k++) {
       action = actions[_k];
       newContent += "" + action.description + "\n\n";
-    }
+    }   
     newContent += newScene.description;
     newHtml = this.processHtml(newScene.id, this.converter.makeHtml(newContent));
     this.visitedScenes[newScene.id] = true;
